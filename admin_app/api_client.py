@@ -9,7 +9,7 @@ import requests
 class ApiClient:
     """HTTP client with JWT token management for the admin API."""
 
-    def __init__(self, base_url="http://localhost:5000"):
+    def __init__(self, base_url="https://newparul-backend.onrender.com"):
         self.base_url = base_url.rstrip('/')
         self.token = None
         self.user = None

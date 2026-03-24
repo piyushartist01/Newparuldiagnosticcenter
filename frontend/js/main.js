@@ -113,7 +113,7 @@ async function loadServices() {
     const dropdown = document.getElementById('serviceType');
 
     try {
-        const resp = await fetch('/api/services');
+        const resp = await fetch('https://newparul-backend.onrender.com/api/services');
         if (!resp.ok) throw new Error('Failed to fetch');
         const services = await resp.json();
 
@@ -200,7 +200,7 @@ function initAppointmentForm() {
         btn.innerHTML = '<span class="spinner"></span> Booking...';
 
         try {
-            const resp = await fetch('/api/appointments', {
+            const resp = await fetch('https://newparul-backend.onrender.com/api/appointments', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -277,7 +277,7 @@ function initContactForm() {
         btn.innerHTML = '<span class="spinner"></span> Sending...';
 
         try {
-            const resp = await fetch('/api/contact', {
+            const resp = await fetch('https://newparul-backend.onrender.com/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
