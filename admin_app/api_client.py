@@ -78,10 +78,14 @@ class ApiClient:
             if "text/csv" in content_type:
                 return resp.text, None
 
-            data = resp.json()
-            if not resp.ok:
-                return None, data.get("error", f"Error {resp.status_code}")
-            return data, None
+            try:
+                data = resp.json()
+                if not resp.ok:
+                    return None, data.get("error", f"Error {resp.status_code}")
+                return data, None
+            except ValueError:
+                # If response is not JSON (e.g. 500 HTML error page from Render)
+                return None, f"Server Error {resp.status_code}: Backend may be down for maintenance."
 
         except requests.ConnectionError:
             return None, "Cannot connect to the server."
