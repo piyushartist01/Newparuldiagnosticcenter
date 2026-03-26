@@ -12,10 +12,10 @@ class Appointment(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     patient_name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(120), nullable=False)
+    email = db.Column(db.String(120), nullable=True, default='')
     phone = db.Column(db.String(20), nullable=False)
     appointment_date = db.Column(db.String(10), nullable=False)  # YYYY-MM-DD
-    appointment_time = db.Column(db.String(5), nullable=False)   # HH:MM
+    appointment_time = db.Column(db.String(5), nullable=True, default='')   # HH:MM
     service_type = db.Column(db.String(100), nullable=False)
     notes = db.Column(db.Text, default='')
     status = db.Column(db.String(20), default='pending')  # pending, confirmed, completed, cancelled

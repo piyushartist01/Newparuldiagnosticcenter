@@ -133,13 +133,13 @@ def create_appointment():
         return jsonify({'error': 'Invalid JSON data'}), 400
 
     # Required fields
-    required = ['patient_name', 'email', 'phone', 'appointment_date',
-                 'appointment_time', 'service_type']
+    required = ['patient_name', 'phone', 'appointment_date', 'service_type']
     missing = [f for f in required if not data.get(f, '').strip()]
     if missing:
         return jsonify({'error': f'Missing required fields: {", ".join(missing)}'}), 400
 
-    if not validate_email(data['email']):
+    email = data.get('email', '').strip()
+    if email and not validate_email(email):
         return jsonify({'error': 'Invalid email address'}), 400
 
     if not validate_phone(data['phone']):
@@ -154,18 +154,20 @@ def create_appointment():
     except ValueError:
         return jsonify({'error': 'Invalid date format. Use YYYY-MM-DD'}), 400
 
-    # Validate time
-    try:
-        datetime.strptime(data['appointment_time'], '%H:%M')
-    except ValueError:
-        return jsonify({'error': 'Invalid time format. Use HH:MM'}), 400
+    # Validate time (optional now)
+    appt_time = data.get('appointment_time', '').strip()
+    if appt_time:
+        try:
+            datetime.strptime(appt_time, '%H:%M')
+        except ValueError:
+            return jsonify({'error': 'Invalid time format. Use HH:MM'}), 400
 
     appointment = Appointment(
         patient_name=data['patient_name'].strip(),
-        email=data['email'].strip().lower(),
+        email=data.get('email', '').strip().lower(),
         phone=data['phone'].strip(),
         appointment_date=data['appointment_date'],
-        appointment_time=data['appointment_time'],
+        appointment_time=appt_time,
         service_type=data['service_type'].strip(),
         notes=data.get('notes', '').strip(),
         status='pending'
@@ -174,22 +176,23 @@ def create_appointment():
     db.session.commit()
 
     # Send confirmation email to patient
-    send_email(
-        appointment.email,
-        'Appointment Confirmation – New Parul Diagnostic Center',
-        f"""
-        <h2>Appointment Confirmed!</h2>
-        <p>Dear <strong>{appointment.patient_name}</strong>,</p>
-        <p>Your appointment has been received successfully.</p>
-        <table style="border-collapse:collapse;">
-            <tr><td style="padding:4px 12px;font-weight:bold;">Service:</td><td>{appointment.service_type}</td></tr>
-            <tr><td style="padding:4px 12px;font-weight:bold;">Date:</td><td>{appointment.appointment_date}</td></tr>
-            <tr><td style="padding:4px 12px;font-weight:bold;">Time:</td><td>{appointment.appointment_time}</td></tr>
-        </table>
-        <p>We will contact you shortly to confirm your appointment.</p>
-        <p>Thank you,<br>New Parul Diagnostic Center</p>
-        """
-    )
+    if appointment.email:
+        send_email(
+            appointment.email,
+            'Appointment Confirmation – New Parul Diagnostic Center',
+            f"""
+            <h2>Appointment Confirmed!</h2>
+            <p>Dear <strong>{appointment.patient_name}</strong>,</p>
+            <p>Your appointment has been received successfully.</p>
+            <table style="border-collapse:collapse;">
+                <tr><td style="padding:4px 12px;font-weight:bold;">Service:</td><td>{appointment.service_type}</td></tr>
+                <tr><td style="padding:4px 12px;font-weight:bold;">Date:</td><td>{appointment.appointment_date}</td></tr>
+                <tr><td style="padding:4px 12px;font-weight:bold;">Time:</td><td>{appointment.appointment_time if appointment.appointment_time else 'TBD'}</td></tr>
+            </table>
+            <p>We will contact you shortly to confirm your appointment.</p>
+            <p>Thank you,<br>New Parul Diagnostic Center</p>
+            """
+        )
 
     # Notify admin
     admin_email = current_app.config.get('ADMIN_EMAIL', '')
@@ -327,18 +330,19 @@ def update_appointment(appt_id):
     appt.status = data['status']
     db.session.commit()
 
-    # Notify patient about status change
-    send_email(
-        appt.email,
-        f'Appointment {appt.status.title()} – New Parul Diagnostic Center',
-        f"""
-        <p>Dear <strong>{appt.patient_name}</strong>,</p>
-        <p>Your appointment for <strong>{appt.service_type}</strong> on
-        {appt.appointment_date} at {appt.appointment_time} has been
-        <strong>{appt.status}</strong>.</p>
-        <p>Thank you,<br>New Parul Diagnostic Center</p>
-        """
-    )
+    # Notify patient about status change (only if email exists)
+    if appt.email:
+        send_email(
+            appt.email,
+            f'Appointment {appt.status.title()} – New Parul Diagnostic Center',
+            f"""
+            <p>Dear <strong>{appt.patient_name}</strong>,</p>
+            <p>Your appointment for <strong>{appt.service_type}</strong> on
+            {appt.appointment_date} at {appt.appointment_time or 'TBD'} has been
+            <strong>{appt.status}</strong>.</p>
+            <p>Thank you,<br>New Parul Diagnostic Center</p>
+            """
+        )
 
     return jsonify({'message': 'Appointment updated', 'appointment': appt.to_dict()})
 

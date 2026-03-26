@@ -45,15 +45,16 @@ def create_app():
     # -----------------------------------------------------------------------
     # Serve the frontend SPA
     # -----------------------------------------------------------------------
+    FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend'))
+
     @app.route('/')
     def serve_index():
-        frontend_dir = os.path.join(os.path.dirname(__file__), '..', 'frontend')
-        return send_from_directory(os.path.abspath(frontend_dir), 'index.html')
+        return send_from_directory(FRONTEND_DIR, 'index.html')
 
-    @app.route('/assets/<path:filename>')
-    def serve_assets(filename):
-        assets_dir = os.path.join(os.path.dirname(__file__), '..', 'frontend', 'assets')
-        return send_from_directory(os.path.abspath(assets_dir), filename)
+    @app.route('/<path:filename>')
+    def serve_frontend_files(filename):
+        """Catch-all: serve any file from the frontend directory tree."""
+        return send_from_directory(FRONTEND_DIR, filename)
 
     # -----------------------------------------------------------------------
     # Seed default data on first run

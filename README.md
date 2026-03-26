@@ -94,6 +94,20 @@ Copy `backend/.env.example` to `backend/.env` and configure:
 
 ## Tech Stack
 
-- **Frontend**: HTML5, CSS3, JavaScript (Inter font, scroll animations)
-- **Backend**: Flask, SQLAlchemy, SQLite, PyJWT, bcrypt
-- **Admin App**: PyQt6
+- **Frontend**: HTML5, CSS3, JavaScript (Mobile-responsive, Scroll animations)
+- **Backend**: Python Flask, SQLAlchemy, SQLite, PyJWT, bcrypt
+- **Admin App**: PyQt6 (Dark Emerald UI, Automated Live Polling)
+
+## Go-Live / Internet Deployment
+
+This repository is pre-configured for **1-Click Deployment** to [Render.com](https://render.com).
+The included `render.yaml` sets up a Python Web Service with an attached persistent disk (`/data`), guaranteeing your Appointment and Contact database is **never lost**.
+
+### Steps to Deploy:
+1. Push this code to a minimal GitHub repository.
+2. Sign up and log into [Render.com](https://render.com).
+3. Go to **Blueprints** -> **New Blueprint Instance**.
+4. Connect the GitHub repository. Render will automatically read `render.yaml` and configure the database and web servers.
+5. In your `frontend/js/main.js` and `admin_app/api_client.py`, replace the hardcoded `https://newparul-backend.onrender.com` URLs with your *actual* newly generated Render Web Service URL.
+
+Your application is fully automated and secure out of the box!

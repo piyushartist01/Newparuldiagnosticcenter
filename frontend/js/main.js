@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initNavigation() {
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
+    if (!hamburger || !navLinks) return;
     const links = navLinks.querySelectorAll('a');
 
     // Hamburger toggle
@@ -163,13 +164,10 @@ function initAppointmentForm() {
     const form = document.getElementById('appointmentForm');
     const btn = document.getElementById('appointmentSubmitBtn');
 
-    // Real-time validation
     const fields = [
         { id: 'patientName', validate: v => v.trim().length >= 2, errId: 'patientNameError' },
-        { id: 'patientEmail', validate: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), errId: 'patientEmailError' },
         { id: 'patientPhone', validate: v => /^[\d\s\+\-\(\)]{7,20}$/.test(v), errId: 'patientPhoneError' },
         { id: 'appointmentDate', validate: v => v !== '', errId: 'appointmentDateError' },
-        { id: 'appointmentTime', validate: v => v !== '', errId: 'appointmentTimeError' },
         { id: 'serviceType', validate: v => v !== '', errId: 'serviceTypeError' },
     ];
 
@@ -205,12 +203,9 @@ function initAppointmentForm() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     patient_name: document.getElementById('patientName').value.trim(),
-                    email: document.getElementById('patientEmail').value.trim(),
                     phone: document.getElementById('patientPhone').value.trim(),
                     appointment_date: document.getElementById('appointmentDate').value,
-                    appointment_time: document.getElementById('appointmentTime').value,
-                    service_type: document.getElementById('serviceType').value,
-                    notes: document.getElementById('appointmentNotes').value.trim()
+                    service_type: document.getElementById('serviceType').value
                 })
             });
 
@@ -234,7 +229,7 @@ function initAppointmentForm() {
             console.error('Appointment error:', err);
         } finally {
             btn.disabled = false;
-            btn.innerHTML = 'Submit Appointment';
+            btn.innerHTML = 'Submit Request';
         }
     });
 }
@@ -244,7 +239,9 @@ function initAppointmentForm() {
 // ---------------------------------------------------------------
 function initContactForm() {
     const form = document.getElementById('contactForm');
+    if (!form) return;
     const btn = document.getElementById('contactSubmitBtn');
+    if (!btn) return;
 
     const fields = [
         { id: 'contactName', validate: v => v.trim().length >= 2, errId: 'contactNameError' },
@@ -254,6 +251,7 @@ function initContactForm() {
 
     fields.forEach(({ id, validate, errId }) => {
         const el = document.getElementById(id);
+        if (!el) return;
         el.addEventListener('blur', () => validateField(el, validate, errId));
         el.addEventListener('input', () => {
             if (el.classList.contains('error')) {

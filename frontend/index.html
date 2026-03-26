@@ -14,117 +14,154 @@
 
 <body>
 
+    
+
+    
     <!-- ============================================
-         NAVIGATION
+         HEADER (Single Green Navbar)
          ============================================ -->
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <div class="nav-container">
-            <a href="#home" class="nav-brand" aria-label="New Parul Diagnostic Center">
-                <div class="logo-icon" aria-hidden="true">🏥</div>
-                <span>New Parul Diagnostic</span>
-            </a>
-
-            <ul class="nav-links" id="navLinks" role="menubar">
-                <li role="none"><a href="#home" role="menuitem" class="active">Home</a></li>
-                <li role="none"><a href="#about" role="menuitem">About</a></li>
-                <li role="none"><a href="#services" role="menuitem">Services</a></li>
-                <li role="none"><a href="#appointment" role="menuitem">Book Appointment</a></li>
-                <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
-            </ul>
-
-            <div class="nav-actions">
-                <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </button>
+    <nav class="navbar green-nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-container nav-container-flex" style="display:flex; justify-content:space-between; align-items:center; width:100%; height:70px;">
+            <!-- Booking Button on Left -->
+            <div class="nav-left">
+                <a href="#appointment" class="btn btn-primary" style="background:white; color:var(--accent); font-weight:bold; box-shadow:none;">Book Test</a>
+            </div>
+            
+            <!-- Logo on Right -->
+            <div class="nav-right" style="display:flex; align-items:center; gap:10px;">
+                <span class="brand-text" style="color:white; font-size:1.3rem; font-weight:bold;">New Parul Diagnostic</span>
+                <img src="images/logo-placeholder.png" alt="Logo" class="logo-img" style="height:48px; background:white; padding:4px; border-radius:8px;" onerror="this.style.display='none'">
             </div>
         </div>
     </nav>
 
-    <!-- ============================================
-         HERO SECTION
-         ============================================ -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-badge">🔬 Trusted Diagnostics Since 2010</div>
-            <h1>
-                Your Health, Our
-                <span class="gradient-text">Priority</span>
-            </h1>
-            <p>
-                Experience accurate, reliable, and affordable diagnostic services with state-of-the-art
-                equipment and a compassionate team of medical professionals.
-            </p>
-            <div class="hero-buttons">
-                <a href="#appointment" class="btn btn-primary">📅 Book Appointment</a>
-                <a href="#services" class="btn btn-outline">View Services →</a>
-            </div>
-        </div>
-    </section>
 
+    
     <!-- ============================================
-         ABOUT SECTION
+         HERO SECTION (BANNER IMAGE)
          ============================================ -->
-    <section class="section" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-image reveal">
-                    <div class="placeholder-icon">🏥</div>
-                </div>
-                <div class="about-text reveal">
-                    <div class="overline"
-                        style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:0.75rem;">
-                        About Us</div>
-                    <h3>Committed to Accurate & Timely Diagnostics</h3>
-                    <p>
-                        <strong>New Parul Diagnostic Center</strong> has been serving the community with reliable
-                        medical testing services for over a decade. Our NABL-accredited laboratory is equipped with
-                        the latest diagnostic technology, ensuring precision in every test we conduct.
-                    </p>
-                    <p>
-                        From routine blood work to advanced imaging, our experienced team of pathologists and
-                        technicians is dedicated to providing you with the highest standards of diagnostic care.
-                    </p>
-                    <div class="about-features">
-                        <div class="about-feature">
-                            <div class="icon">✅</div>
-                            <span>NABL Accredited</span>
-                        </div>
-                        <div class="about-feature">
-                            <div class="icon">⚡</div>
-                            <span>Fast Reports</span>
-                        </div>
-                        <div class="about-feature">
-                            <div class="icon">🔬</div>
-                            <span>Latest Equipment</span>
-                        </div>
-                        <div class="about-feature">
-                            <div class="icon">💰</div>
-                            <span>Affordable Rates</span>
-                        </div>
-                    </div>
+    <section class="hero full-banner" id="home">
+        <div class="hero-image-wrapper">
+            <img src="images/hero_banner.png" alt="Family Healthcare Banner" class="hero-banner-image">
+            <div class="hero-banner-overlay">
+                <div class="hero-badge" style="background:rgba(255,255,255,0.9); color:var(--accent); border:none;">🔬 Trusted Diagnostics Since 2010</div>
+                <h1 style="color:white; font-size: clamp(2.5rem, 5vw, 3.5rem); line-height:1.2; margin-bottom:1rem; text-shadow: 2px 2px 8px rgba(0,0,0,0.6);">Comprehensive Health Packages For Your Family</h1>
+                <p style="color:#f1f5f9; font-size: 1.15rem; max-width: 500px; text-shadow: 1px 1px 4px rgba(0,0,0,0.6);">Experience accurate, reliable, and affordable diagnostic services right at your doorstep.</p>
+                <div class="hero-buttons" style="margin-top:2rem;">
+                    <a href="#appointment" class="btn btn-primary btn-lg" style="font-size:1.1rem; padding:1rem 2.5rem; background:#10b981; border:none; color:white;">Book Now — Upto 60% OFF</a>
                 </div>
             </div>
         </div>
     </section>
 
+
     <!-- ============================================
-         SERVICES SECTION
+         QUICK INFO / ACCREDITATION RIBBON
+         ============================================ -->
+    <section class="accreditation-ribbon">
+        <div class="container ribbon-grid">
+            <div class="ribbon-item">
+                <div class="icon">✅</div>
+                <span>NABL Accredited Lab</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="icon">🏠</div>
+                <span>Free Home Sample Collection</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="icon">⚡</div>
+                <span>Reports within 24 Hours</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="icon">👨‍⚕️</div>
+                <span>Experienced Pathologists</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         POPULAR HEALTH CHECKUP / SERVICES
          ============================================ -->
     <section class="section section-alt" id="services">
         <div class="container">
             <div class="section-header reveal">
-                <div class="overline">Our Services</div>
-                <h2>Comprehensive Diagnostic Solutions</h2>
-                <p>We offer a wide range of medical tests and diagnostic services to help you stay on top of your
-                    health.</p>
+                <div class="overline">Our Packages</div>
+                <h2>Popular Health Checkups</h2>
+                <p>Select from our comprehensive range of preventive health checkup packages tailored to your needs.</p>
             </div>
             <div class="services-grid" id="servicesGrid">
-                <!-- Services loaded dynamically via JS -->
-                <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-secondary);">
-                    <div class="spinner"
-                        style="border-color: var(--border); border-top-color: var(--accent); width: 32px; height: 32px; margin: 0 auto 1rem;">
+                <!-- Services loaded dynamically via JS, but here are static examples matching the new UI -->
+                
+                <!-- Sample Card 1 -->
+                <div class="service-card reveal">
+                    <div class="card-tag">Bestseller</div>
+                    <h4>Master Health Checkup</h4>
+                    <p class="service-params">Includes 75 Parameters (CBC, Lipid, Thyroid, LFT, KFT)</p>
+                    <div class="price-block">
+                        <span class="old-price">₹2500</span>
+                        <span class="service-price">₹999</span>
                     </div>
-                    <p>Loading services...</p>
+                    <a href="#appointment" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Book Now</a>
+                </div>
+
+                <!-- Sample Card 2 -->
+                <div class="service-card reveal">
+                    <h4>Senior Citizen Package</h4>
+                    <p class="service-params">Includes 60 Parameters focusing on age-related screenings</p>
+                    <div class="price-block">
+                        <span class="old-price">₹3000</span>
+                        <span class="service-price">₹1499</span>
+                    </div>
+                    <a href="#appointment" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Book Now</a>
+                </div>
+
+                <!-- Sample Card 3 -->
+                <div class="service-card reveal">
+                    <h4>Diabetes Care Profile</h4>
+                    <p class="service-params">Includes 30 Parameters (HbA1c, Fasting Blood Sugar, Urine Routine)</p>
+                    <div class="price-block">
+                        <span class="old-price">₹1500</span>
+                        <span class="service-price">₹599</span>
+                    </div>
+                    <a href="#appointment" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Book Now</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         HOW IT WORKS (TIMELINE)
+         ============================================ -->
+    <section class="section" id="how-it-works">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="overline">Easy Process</div>
+                <h2>How to avail our Checkup Packages</h2>
+            </div>
+            <div class="timeline-container reveal">
+                <div class="timeline-step">
+                    <div class="step-icon">📅</div>
+                    <h5>Book Test</h5>
+                    <p>Schedule your preferred date & time online</p>
+                </div>
+                <div class="timeline-line"></div>
+                <div class="timeline-step">
+                    <div class="step-icon">🏠</div>
+                    <h5>Sample Collection</h5>
+                    <p>Home collection by trained phlebotomists</p>
+                </div>
+                <div class="timeline-line"></div>
+                <div class="timeline-step">
+                    <div class="step-icon">🔬</div>
+                    <h5>Lab Process</h5>
+                    <p>Testing with state-of-the-art equipment</p>
+                </div>
+                <div class="timeline-line"></div>
+                <div class="timeline-step">
+                    <div class="step-icon">📄</div>
+                    <h5>Get Reports</h5>
+                    <p>Digital reports within 24-48 hours</p>
                 </div>
             </div>
         </div>
@@ -133,49 +170,25 @@
     <!-- ============================================
          APPOINTMENT SECTION
          ============================================ -->
-    <section class="section" id="appointment">
+    <section class="section section-alt" id="appointment">
         <div class="container">
             <div class="section-header reveal">
-                <div class="overline">Book Now</div>
-                <h2>Schedule Your Appointment</h2>
-                <p>Choose your preferred date and time, and we'll take care of the rest.</p>
+                <div class="overline">Booking</div>
+                <h2>Schedule a Test</h2>
+                <p>Fill out the form below and we will contact you to confirm the appointment.</p>
             </div>
 
             <div class="appointment-wrapper">
                 <div class="appointment-info reveal">
-                    <h3>Why Choose Us?</h3>
-                    <p>We make diagnostics simple, quick, and hassle-free. Book your appointment online and skip the
-                        wait.</p>
-                    <ul class="info-list">
-                        <li>
-                            <div class="icon">🕐</div>
-                            <div>
-                                <strong>Quick Turnaround</strong><br>
-                                <small>Get your test reports within 24-48 hours</small>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon">🏠</div>
-                            <div>
-                                <strong>Home Sample Collection</strong><br>
-                                <small>We can collect samples at your doorstep</small>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon">👨‍⚕️</div>
-                            <div>
-                                <strong>Expert Pathologists</strong><br>
-                                <small>Experienced team of qualified professionals</small>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon">📱</div>
-                            <div>
-                                <strong>Online Reports</strong><br>
-                                <small>Access your reports anytime, anywhere</small>
-                            </div>
-                        </li>
-                    </ul>
+                    <h3>We're here to help you</h3>
+                    <p>Our support team is available from 7 AM to 9 PM to assist you with booking issues or answering queries regarding test requirements.</p>
+                    <div class="contact-card">
+                        <div class="icon">📞</div>
+                        <div>
+                            <h4>Call Us For Direct Booking</h4>
+                            <p>+91 98765 43210</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="appointment-form-card reveal">
@@ -196,12 +209,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="patientEmail">Email Address <span class="required">*</span></label>
-                            <input type="email" id="patientEmail" name="email" class="form-control"
-                                placeholder="you@example.com" required>
-                            <div class="error-message" id="patientEmailError">Please enter a valid email address</div>
-                        </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="appointmentDate">Preferred Date <span class="required">*</span></label>
@@ -210,28 +217,17 @@
                                 <div class="error-message" id="appointmentDateError">Please select a date</div>
                             </div>
                             <div class="form-group">
-                                <label for="appointmentTime">Preferred Time <span class="required">*</span></label>
-                                <input type="time" id="appointmentTime" name="appointment_time" class="form-control"
-                                    required>
-                                <div class="error-message" id="appointmentTimeError">Please select a time</div>
+                                <label for="serviceType">Select Package <span class="required">*</span></label>
+                                <select id="serviceType" name="service_type" class="form-control" required>
+                                    <option value="">Choose a test or service...</option>
+                                    <!-- Options loaded dynamically from API by main.js -->
+                                </select>
+                                <div class="error-message" id="serviceTypeError">Please select a service</div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="serviceType">Select Test / Service <span class="required">*</span></label>
-                            <select id="serviceType" name="service_type" class="form-control" required>
-                                <option value="">Choose a test or service...</option>
-                                <!-- Options loaded dynamically -->
-                            </select>
-                            <div class="error-message" id="serviceTypeError">Please select a service</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="appointmentNotes">Additional Notes</label>
-                            <textarea id="appointmentNotes" name="notes" class="form-control"
-                                placeholder="Any special requirements or medical history we should know about..."></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" id="appointmentSubmitBtn"
                             style="width:100%; justify-content: center;">
-                            Submit Appointment
+                            Submit Request
                         </button>
                     </form>
                 </div>
@@ -240,74 +236,44 @@
     </section>
 
     <!-- ============================================
-         CONTACT SECTION
+         TESTIMONIALS
          ============================================ -->
-    <section class="section section-alt" id="contact">
+    <section class="section">
         <div class="container">
             <div class="section-header reveal">
-                <div class="overline">Get In Touch</div>
-                <h2>Contact Us</h2>
-                <p>Have questions? We'd love to hear from you. Reach out to us anytime.</p>
+                <div class="overline">Reviews</div>
+                <h2>What Our Patients Say</h2>
             </div>
-
-            <div class="contact-grid">
-                <div class="contact-cards-grid reveal">
-                    <div class="contact-card">
-                        <div class="icon">📍</div>
-                        <div>
-                            <h4>Visit Us</h4>
-                            <p>123 Medical Plaza, Near City Hospital,<br>Healthcare District, Mumbai 400001</p>
-                        </div>
-                    </div>
-                    <div class="contact-card">
-                        <div class="icon">📞</div>
-                        <div>
-                            <h4>Call Us</h4>
-                            <p>+91 98765 43210<br>+91 22 2345 6789</p>
-                        </div>
-                    </div>
-                    <div class="contact-card">
-                        <div class="icon">📧</div>
-                        <div>
-                            <h4>Email Us</h4>
-                            <p>info@paruldiagnostic.com<br>appointments@paruldiagnostic.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-card">
-                        <div class="icon">🕐</div>
-                        <div>
-                            <h4>Working Hours</h4>
-                            <p>Mon – Sat: 7:00 AM – 9:00 PM<br>Sunday: 8:00 AM – 2:00 PM</p>
+            <div class="testimonials-grid reveal">
+                <div class="testimonial-card">
+                    <p class="quote">"Exceptional service. The home collection was seamless, and the phlebotomist was very professional. Received reports the very next morning!"</p>
+                    <div class="author">
+                        <div class="avatar">S</div>
+                        <div class="info">
+                            <h5>Sanjay Sharma</h5>
+                            <span>Verified Patient</span>
                         </div>
                     </div>
                 </div>
-
-                <div class="contact-form-card reveal">
-                    <h3>Send Us a Message</h3>
-                    <form id="contactForm" novalidate>
-                        <div class="form-group">
-                            <label for="contactName">Your Name <span class="required">*</span></label>
-                            <input type="text" id="contactName" name="name" class="form-control"
-                                placeholder="Enter your name" required>
-                            <div class="error-message" id="contactNameError">Please enter your name</div>
+                <div class="testimonial-card">
+                    <p class="quote">"Very clean and hygienic lab setup. The staff is courteous. Pricing is sensible for their health packages compared to other corporate labs."</p>
+                    <div class="author">
+                        <div class="avatar">R</div>
+                        <div class="info">
+                            <h5>Rahul Verma</h5>
+                            <span>Master Health Checkup</span>
                         </div>
-                        <div class="form-group">
-                            <label for="contactEmail">Your Email <span class="required">*</span></label>
-                            <input type="email" id="contactEmail" name="email" class="form-control"
-                                placeholder="you@example.com" required>
-                            <div class="error-message" id="contactEmailError">Please enter a valid email</div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="quote">"Accurate reports and timely delivery. I've been trusting New Parul Diagnostics for over 5 years for my family's routine checkups."</p>
+                    <div class="author">
+                        <div class="avatar">N</div>
+                        <div class="info">
+                            <h5>Neha Gupta</h5>
+                            <span>Verified Patient</span>
                         </div>
-                        <div class="form-group">
-                            <label for="contactMessage">Message <span class="required">*</span></label>
-                            <textarea id="contactMessage" name="message" class="form-control"
-                                placeholder="Write your message here..." required></textarea>
-                            <div class="error-message" id="contactMessageError">Please enter a message</div>
-                        </div>
-                        <button type="submit" class="btn btn-primary" id="contactSubmitBtn"
-                            style="width:100%; justify-content: center;">
-                            Send Message
-                        </button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -319,41 +285,29 @@
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-brand">
-                <h3>🏥 New Parul Diagnostic Center</h3>
+                <h3>🏥 New Parul Diagnostic</h3>
                 <p>Your trusted partner for accurate and affordable medical diagnostics. Serving the community with
                     excellence since 2010.</p>
                 <div class="footer-social">
-                    <a href="#" aria-label="Facebook" title="Facebook">📘</a>
-                    <a href="#" aria-label="Twitter" title="Twitter">🐦</a>
-                    <a href="#" aria-label="Instagram" title="Instagram">📷</a>
-                    <a href="#" aria-label="LinkedIn" title="LinkedIn">💼</a>
+                    <a href="#" aria-label="Facebook">fb</a>
+                    <a href="#" aria-label="Twitter">tw</a>
+                    <a href="#" aria-label="Instagram">ig</a>
                 </div>
             </div>
             <div class="footer-col">
-                <h4>Quick Links</h4>
+                <h4>Popular Packages</h4>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#appointment">Book Appointment</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Popular Tests</h4>
-                <ul>
-                    <li><a href="#services">Blood Test (CBC)</a></li>
-                    <li><a href="#services">Thyroid Profile</a></li>
-                    <li><a href="#services">Lipid Profile</a></li>
-                    <li><a href="#services">Vitamin D Test</a></li>
-                    <li><a href="#services">X-Ray & ECG</a></li>
+                    <li><a href="#services">Master Health Checkup</a></li>
+                    <li><a href="#services">Diabetes Profile</a></li>
+                    <li><a href="#services">Senior Citizen Test</a></li>
+                    <li><a href="#services">Thyroid Panel</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Contact Info</h4>
                 <ul>
-                    <li><a href="tel:+919876543210">📞 +91 98765 43210</a></li>
-                    <li><a href="mailto:info@paruldiagnostic.com">📧 info@paruldiagnostic.com</a></li>
+                    <li>📞 +91 98765 43210</li>
+                    <li>📧 info@paruldiagnostic.com</li>
                     <li>📍 Mumbai – 400001</li>
                     <li>🕐 Mon–Sat: 7AM–9PM</li>
                 </ul>
@@ -361,7 +315,6 @@
         </div>
         <div class="footer-bottom">
             <p>&copy; 2024 New Parul Diagnostic Center. All rights reserved.</p>
-            <p>Made with ❤️ for better healthcare</p>
         </div>
     </footer>
 
