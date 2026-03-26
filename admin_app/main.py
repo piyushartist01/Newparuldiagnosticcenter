@@ -266,14 +266,49 @@ class AdminApp(tk.Tk):
                 sel = tree.selection()
                 if not sel: return messagebox.showwarning("Warning", "Select an appointment")
                 appt_id = tree.item(sel[0])['values'][0]
+                curr_st = str(tree.item(sel[0])['values'][6]).lower()
+                if curr_st == new_st: return
+                if curr_st in ['completed', 'cancelled']:
+                     return messagebox.showwarning("Warning", f"Cannot change status. Appointment is already {curr_st}.")
+                
                 self._run_async(
                     lambda: self.api.update_appointment_status(appt_id, new_st),
                     lambda r: self.show_appointments(status_filter) if not r[1] else messagebox.showerror("Error", r[1])
                 )
                 
-            ttk.Button(btn_frame, text="✅ Confirm", style='Accent.TButton', command=lambda: update_status('confirmed')).pack(side='left', padx=5)
-            ttk.Button(btn_frame, text="✔ Complete", command=lambda: update_status('completed')).pack(side='left', padx=5)
-            ttk.Button(btn_frame, text="✖ Cancel", command=lambda: update_status('cancelled')).pack(side='left', padx=5)
+            btn_confirm = ttk.Button(btn_frame, text="✅ Confirm", style='Accent.TButton', command=lambda: update_status('confirmed'))
+            btn_confirm.pack(side='left', padx=5)
+            btn_complete = ttk.Button(btn_frame, text="✔ Complete", command=lambda: update_status('completed'))
+            btn_complete.pack(side='left', padx=5)
+            btn_cancel = ttk.Button(btn_frame, text="✖ Cancel", command=lambda: update_status('cancelled'))
+            btn_cancel.pack(side='left', padx=5)
+            
+            btn_confirm.state(['disabled'])
+            btn_complete.state(['disabled'])
+            btn_cancel.state(['disabled'])
+            
+            def on_select(event):
+                sel = tree.selection()
+                if not sel:
+                    btn_confirm.state(['disabled'])
+                    btn_complete.state(['disabled'])
+                    btn_cancel.state(['disabled'])
+                    return
+                st = str(tree.item(sel[0])['values'][6]).lower()
+                if st in ['completed', 'cancelled']:
+                    btn_confirm.state(['disabled'])
+                    btn_complete.state(['disabled'])
+                    btn_cancel.state(['disabled'])
+                elif st == 'confirmed':
+                    btn_confirm.state(['disabled'])
+                    btn_complete.state(['!disabled'])
+                    btn_cancel.state(['!disabled'])
+                else:
+                    btn_confirm.state(['!disabled'])
+                    btn_complete.state(['!disabled'])
+                    btn_cancel.state(['!disabled'])
+
+            tree.bind('<<TreeviewSelect>>', on_select)
 
         self._run_async(lambda: self.api.get_appointments(status_filter), on_result)
 

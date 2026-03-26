@@ -27,7 +27,7 @@ class ApiClient:
             resp = self.session.post(
                 f"{self.base_url}/api/admin/login",
                 json={"username": username, "password": password},
-                timeout=10,
+                timeout=60,
             )
             data = resp.json()
 
@@ -65,7 +65,7 @@ class ApiClient:
         url = f"{self.base_url}{path}"
         try:
             resp = self.session.request(
-                method, url, headers=self._headers(), timeout=5, **kwargs
+                method, url, headers=self._headers(), timeout=60, **kwargs
             )
             if resp.status_code == 401:
                 self.token = None
