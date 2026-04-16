@@ -8,7 +8,7 @@
 // CONFIGURATION
 // ============================================================
 // Replace this URL with your Google Apps Script Web App URL after deploying the script
-const GOOGLE_SHEETS_URL = '';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwxJpVoZge-mYlp6r2kZbi3rFFIkR9q1efEMRjKFTmdn7lQfROMmHuEFMuW9iXN97KeYA/exec';
 
 // ============================================================
 // INITIALIZATION
