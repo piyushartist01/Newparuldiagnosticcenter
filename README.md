@@ -1,113 +1,53 @@
 # New Parul Diagnostic Center
 
-Professional medical diagnostic center website with appointment booking, contact forms, and a standalone desktop admin application.
+A modern, premium medical diagnostic center website with Google Sheets integration for appointment bookings.
 
-## Project Structure
+## Features
 
-```
-new-parul-diagnostic/
-├── frontend/              # Static website (HTML/CSS/JS)
-│   ├── index.html
-│   ├── css/styles.css
-│   └── js/main.js
-├── backend/               # Flask API server
-│   ├── app.py
-│   ├── config.py
-│   ├── models.py
-│   ├── routes.py
-│   ├── requirements.txt
-│   └── .env.example
-├── admin_app/             # PyQt6 Desktop Admin App
-│   ├── main.py
-│   ├── api_client.py
-│   └── requirements.txt
-├── README.md
-└── .gitignore
-```
+- **Modern UI**: CarePlus-inspired medical landing page design
+- **Fully Responsive**: Works beautifully on desktop, tablet, and mobile
+- **Smooth Animations**: Scroll-triggered fade-in effects, counter animations, and hover micro-interactions
+- **Google Sheets Integration**: Appointment form data goes directly to a Google Sheet (like Google Forms)
+- **Zero Backend**: Pure static frontend — host anywhere for free
+- **SEO Optimized**: Proper meta tags, semantic HTML5, and accessibility
+
+## Sections
+
+1. **Hero** — Engaging headline with stats counter and medical team image
+2. **About** — Company mission with feature highlights
+3. **Services** — 6 service cards with pricing and book-now CTAs
+4. **Process** — 4-step visual guide (Book → Collect → Process → Report)
+5. **Booking Form** — Patient details form with validation and Google Sheets submission
+6. **CTA** — Call-to-action banner
+7. **Footer** — Contact info, links, and social media
 
 ## Quick Start
 
-### 1. Backend (Flask API)
-
+### Run Locally
 ```bash
 cd backend
-pip install -r requirements.txt
 python app.py
 ```
+Then open http://localhost:5000 in your browser.
 
-The server starts at **http://localhost:5000**. On first run it automatically:
-- Creates the SQLite database
-- Seeds 12 medical services
-- Creates a default admin user (`admin` / `admin123`)
-
-### 2. Website
-
-Open **http://localhost:5000** in your browser. The Flask server serves the frontend automatically.
-
-### 3. Desktop Admin App
-
-```bash
-cd admin_app
-pip install -r requirements.txt
-python main.py
-```
-
-Log in with `admin` / `admin123` (or your custom credentials from `.env`).
-
-## Environment Variables
-
-Copy `backend/.env.example` to `backend/.env` and configure:
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `SECRET_KEY` | `dev-secret-key...` | Flask secret key |
-| `JWT_SECRET_KEY` | (same as SECRET_KEY) | JWT signing key |
-| `JWT_EXPIRATION_HOURS` | `24` | Token expiry |
-| `ADMIN_USERNAME` | `admin` | Default admin username |
-| `ADMIN_PASSWORD` | `admin123` | Default admin password |
-| `MAIL_SERVER` | `smtp.gmail.com` | SMTP server |
-| `MAIL_USERNAME` | *(empty)* | SMTP username |
-| `MAIL_PASSWORD` | *(empty)* | SMTP password |
-
-## API Endpoints
-
-### Public
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/services` | List all services |
-| `POST` | `/api/appointments` | Book an appointment |
-| `POST` | `/api/contact` | Submit contact message |
-
-### Admin (JWT Required)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/admin/login` | Get JWT token |
-| `GET` | `/api/admin/dashboard` | Dashboard stats |
-| `GET` | `/api/admin/appointments` | List appointments |
-| `PUT` | `/api/admin/appointments/<id>` | Update status |
-| `DELETE` | `/api/admin/appointments/<id>` | Delete |
-| `GET/POST` | `/api/admin/services` | List / Add |
-| `PUT/DELETE` | `/api/admin/services/<id>` | Update / Delete |
-| `GET` | `/api/admin/messages` | List messages |
-| `PUT` | `/api/admin/messages/<id>/read` | Mark read |
-| `GET` | `/api/admin/export/appointments` | CSV export |
+### Set Up Google Sheets
+See [GOOGLE_SHEETS_SETUP.md](GOOGLE_SHEETS_SETUP.md) for step-by-step instructions.
 
 ## Tech Stack
 
-- **Frontend**: HTML5, CSS3, JavaScript (Mobile-responsive, Scroll animations)
-- **Backend**: Python Flask, SQLAlchemy, SQLite, PyJWT, bcrypt
-- **Admin App**: PyQt6 (Dark Emerald UI, Automated Live Polling)
+- **HTML5** + **CSS3** + **Vanilla JavaScript**
+- **Google Fonts**: Outfit + Plus Jakarta Sans
+- **Google Apps Script**: For serverless form submission to Google Sheets
+- **Python**: Simple static file server for local development (standard library only)
 
-## Go-Live / Internet Deployment
+## Deployment
 
-This repository is pre-configured for **1-Click Deployment** to [Render.com](https://render.com).
-The included `render.yaml` sets up a Python Web Service with an attached persistent disk (`/data`), guaranteeing your Appointment and Contact database is **never lost**.
+This is a static website — deploy the `frontend/` folder to any static hosting:
 
-### Steps to Deploy:
-1. Push this code to a minimal GitHub repository.
-2. Sign up and log into [Render.com](https://render.com).
-3. Go to **Blueprints** -> **New Blueprint Instance**.
-4. Connect the GitHub repository. Render will automatically read `render.yaml` and configure the database and web servers.
-5. In your `frontend/js/main.js` and `admin_app/api_client.py`, replace the hardcoded `https://newparul-backend.onrender.com` URLs with your *actual* newly generated Render Web Service URL.
+- **GitHub Pages**: Push to a repo and enable Pages for the `frontend` directory
+- **Netlify**: Drag and drop the `frontend` folder
+- **Vercel**: Point to the `frontend` directory
 
-Your application is fully automated and secure out of the box!
+## License
+
+© 2025 New Parul Diagnostic Center. All rights reserved.
