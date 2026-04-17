@@ -9,7 +9,7 @@
 // CONFIGURATION
 // ============================================================
 // Google Apps Script Web App URL (handles both appointments POST and services GET)
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwxJpVoZge-mYlp6r2kZbi3rFFIkR9q1efEMRjKFTmdn7lQfROMmHuEFMuW9iXN97KeYA/exec';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyprmVNK-Rvutrq457qs2ef0CJKMCKY-Yt6UEaKG6Ga0wo0ddll7OepvH7GVcyvYWxZfA/exec';
 
 // ============================================================
 // FALLBACK SERVICES (used if Google Sheets fetch fails)
