@@ -1,14 +1,27 @@
 /**
  * main.js — New Parul Diagnostic Center
  * Handles: Scroll animations, Navbar, Mobile menu, Counter animation,
- *          Form validation & Google Sheets submission, Toast notifications
+ *          Form validation & Google Sheets submission, Toast notifications,
+ *          Dynamic services loading from Google Sheets
  */
 
 // ============================================================
 // CONFIGURATION
 // ============================================================
-// Replace this URL with your Google Apps Script Web App URL after deploying the script
+// Google Apps Script Web App URL (handles both appointments POST and services GET)
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwxJpVoZge-mYlp6r2kZbi3rFFIkR9q1efEMRjKFTmdn7lQfROMmHuEFMuW9iXN97KeYA/exec';
+
+// ============================================================
+// FALLBACK SERVICES (used if Google Sheets fetch fails)
+// ============================================================
+const FALLBACK_SERVICES = [
+    { name: 'Complete Blood Count (CBC)', description: 'Comprehensive blood test measuring red blood cells, white blood cells, hemoglobin, and platelets.', price: 350, originalPrice: 525, icon: '🩸', active: true },
+    { name: 'Blood Sugar (Fasting / PP)', description: 'Measures blood glucose levels to screen for diabetes and monitor blood sugar control.', price: 150, originalPrice: 225, icon: '💉', active: true },
+    { name: 'Lipid Profile', description: 'Measures cholesterol levels including HDL, LDL, triglycerides, and total cholesterol.', price: 500, originalPrice: 750, icon: '❤️', active: true },
+    { name: 'Thyroid Profile (T3, T4, TSH)', description: 'Evaluates thyroid gland function by measuring T3, T4, and TSH hormone levels.', price: 600, originalPrice: 900, icon: '🦋', active: true },
+    { name: 'ECG (Electrocardiogram)', description: 'Records the electrical activity of the heart to detect cardiac conditions and irregularities.', price: 300, originalPrice: 450, icon: '🫀', active: true },
+    { name: 'Ultrasound', description: 'Non-invasive imaging using sound waves to examine internal organs and tissues safely.', price: 800, originalPrice: 1200, icon: '🔬', active: true },
+];
 
 // ============================================================
 // INITIALIZATION
@@ -20,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initCounterAnimation();
     initFormDateMin();
+    loadServicesFromSheet(); // Dynamic services from Google Sheets
 
     const form = document.getElementById('appointmentForm');
     if (form) {
@@ -207,15 +221,104 @@ function initFormClearErrors() {
 }
 
 // ============================================================
+// DYNAMIC SERVICES — Google Sheets Integration
+// ============================================================
+
+/**
+ * Fetches services from the Google Sheet via Apps Script doGet.
+ * Falls back to FALLBACK_SERVICES if the request fails.
+ */
+async function loadServicesFromSheet() {
+    showServiceSkeletons();
+
+    let services = FALLBACK_SERVICES;
+
+    if (GOOGLE_SHEETS_URL) {
+        try {
+            const url = `${GOOGLE_SHEETS_URL}?action=services`;
+            const res = await fetch(url, { method: 'GET', mode: 'cors' });
+            if (res.ok) {
+                const data = await res.json();
+                if (data.result === 'success' && Array.isArray(data.services) && data.services.length > 0) {
+                    services = data.services.filter(s => String(s.active).toUpperCase() === 'TRUE');
+                }
+            }
+        } catch (err) {
+            console.warn('Services fetch failed, using fallback data.', err);
+        }
+    }
+
+    renderServiceCards(services);
+    renderBookingDropdown(services);
+    // Re-init scroll animations for dynamically added cards
+    initScrollAnimations();
+}
+
+/** Shows placeholder skeleton cards while loading */
+function showServiceSkeletons() {
+    const grid = document.getElementById('servicesGrid');
+    if (!grid) return;
+    grid.innerHTML = Array(6).fill(0).map(() => `
+        <div class="service-card skeleton-card">
+            <div class="skeleton skeleton-icon"></div>
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-desc"></div>
+            <div class="skeleton skeleton-desc short"></div>
+            <div class="skeleton skeleton-btn"></div>
+        </div>
+    `).join('');
+}
+
+/** Renders service cards dynamically from sheet data */
+function renderServiceCards(services) {
+    const grid = document.getElementById('servicesGrid');
+    if (!grid) return;
+
+    const delays = ['', 'delay-1', 'delay-2', 'delay-3', 'delay-4', 'delay-5'];
+
+    if (services.length === 0) {
+        grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);grid-column:1/-1;">No services available right now. Please call us directly.</p>';
+        return;
+    }
+
+    grid.innerHTML = services.map((s, i) => `
+        <div class="service-card fade-up ${delays[i % delays.length]}">
+            <div class="service-icon">${s.icon || '🔬'}</div>
+            <h4>${s.name}</h4>
+            <p class="service-desc">${s.description}</p>
+            <div class="service-price-row">
+                <div>
+                    <span class="service-price">₹${Number(s.price).toLocaleString('en-IN')}</span>
+                    ${s.originalPrice ? `<span class="service-price-old">₹${Number(s.originalPrice).toLocaleString('en-IN')}</span>` : ''}
+                </div>
+                <a href="#book-test" class="service-book-btn" onclick="selectService('${s.name}')">Book Now →</a>
+            </div>
+        </div>
+    `).join('');
+}
+
+/** Populates the booking form dropdown from sheet data */
+function renderBookingDropdown(services) {
+    const select = document.getElementById('serviceType');
+    if (!select) return;
+
+    // Keep the default empty option, then rebuild the rest
+    select.innerHTML = '<option value="">Choose a test package...</option>' +
+        services.map(s =>
+            `<option value="${s.name}">${s.name} — ₹${Number(s.price).toLocaleString('en-IN')}</option>`
+        ).join('');
+}
+
+// ============================================================
 // SERVICE SELECTION (from service cards)
 // ============================================================
 window.selectService = function(serviceName) {
     const select = document.getElementById('serviceType');
     if (select) {
         select.value = serviceName;
-        // Scroll to booking section (smooth scroll handled by CSS)
     }
 };
+
 
 // ============================================================
 // FORM SUBMISSION — Google Sheets Integration

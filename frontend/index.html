@@ -200,102 +200,9 @@
                     family healthy.</p>
             </div>
 
+            <!-- Services grid: populated dynamically from Google Sheets via main.js -->
             <div class="services-grid" id="servicesGrid">
-                <!-- Service Card 1 -->
-                <div class="service-card fade-up">
-                    <div class="service-icon">🩸</div>
-                    <h4>Complete Blood Count</h4>
-                    <p class="service-desc">Comprehensive blood test measuring red blood cells, white blood cells,
-                        hemoglobin, and platelets.</p>
-                    <div class="service-price-row">
-                        <div>
-                            <span class="service-price">₹350</span>
-                            <span class="service-price-old">₹525</span>
-                        </div>
-                        <a href="#book-test" class="service-book-btn"
-                            onclick="selectService('Complete Blood Count (CBC)')">Book Now →</a>
-                    </div>
-                </div>
-
-                <!-- Service Card 2 -->
-                <div class="service-card fade-up delay-1">
-                    <div class="service-icon">💉</div>
-                    <h4>Blood Sugar Test</h4>
-                    <p class="service-desc">Measures blood glucose levels to screen for diabetes and monitor blood sugar
-                        control.</p>
-                    <div class="service-price-row">
-                        <div>
-                            <span class="service-price">₹150</span>
-                            <span class="service-price-old">₹225</span>
-                        </div>
-                        <a href="#book-test" class="service-book-btn"
-                            onclick="selectService('Blood Sugar (Fasting / PP)')">Book Now →</a>
-                    </div>
-                </div>
-
-                <!-- Service Card 3 -->
-                <div class="service-card fade-up delay-2">
-                    <div class="service-icon">❤️</div>
-                    <h4>Lipid Profile</h4>
-                    <p class="service-desc">Measures cholesterol levels including HDL, LDL, triglycerides, and total
-                        cholesterol.</p>
-                    <div class="service-price-row">
-                        <div>
-                            <span class="service-price">₹500</span>
-                            <span class="service-price-old">₹750</span>
-                        </div>
-                        <a href="#book-test" class="service-book-btn" onclick="selectService('Lipid Profile')">Book Now
-                            →</a>
-                    </div>
-                </div>
-
-                <!-- Service Card 4 -->
-                <div class="service-card fade-up delay-3">
-                    <div class="service-icon">🦋</div>
-                    <h4>Thyroid Profile</h4>
-                    <p class="service-desc">Evaluates thyroid gland function by measuring T3, T4, and TSH hormone
-                        levels.</p>
-                    <div class="service-price-row">
-                        <div>
-                            <span class="service-price">₹600</span>
-                            <span class="service-price-old">₹900</span>
-                        </div>
-                        <a href="#book-test" class="service-book-btn"
-                            onclick="selectService('Thyroid Profile (T3, T4, TSH)')">Book Now →</a>
-                    </div>
-                </div>
-
-                <!-- Service Card 5 -->
-                <div class="service-card fade-up delay-4">
-                    <div class="service-icon">🫀</div>
-                    <h4>ECG Test</h4>
-                    <p class="service-desc">Records the electrical activity of the heart to detect cardiac conditions
-                        and irregularities.</p>
-                    <div class="service-price-row">
-                        <div>
-                            <span class="service-price">₹300</span>
-                            <span class="service-price-old">₹450</span>
-                        </div>
-                        <a href="#book-test" class="service-book-btn"
-                            onclick="selectService('ECG (Electrocardiogram)')">Book Now →</a>
-                    </div>
-                </div>
-
-                <!-- Service Card 6 -->
-                <div class="service-card fade-up delay-5">
-                    <div class="service-icon">🔬</div>
-                    <h4>Ultrasound</h4>
-                    <p class="service-desc">Non-invasive imaging using sound waves to examine internal organs and
-                        tissues safely.</p>
-                    <div class="service-price-row">
-                        <div>
-                            <span class="service-price">₹800</span>
-                            <span class="service-price-old">₹1200</span>
-                        </div>
-                        <a href="#book-test" class="service-book-btn" onclick="selectService('Ultrasound')">Book Now
-                            →</a>
-                    </div>
-                </div>
+                <!-- Skeleton cards shown while loading -->
             </div>
         </div>
     </section>
@@ -411,25 +318,9 @@
                             </div>
                             <div class="form-group full-width">
                                 <label for="serviceType">Select Service *</label>
+                                <!-- Dropdown options populated dynamically from Google Sheets via main.js -->
                                 <select id="serviceType" class="form-control" required>
-                                    <option value="">Choose a test package...</option>
-                                    <option value="Complete Blood Count (CBC)">Complete Blood Count (CBC) — ₹350
-                                    </option>
-                                    <option value="Blood Sugar (Fasting / PP)">Blood Sugar (Fasting / PP) — ₹150
-                                    </option>
-                                    <option value="Lipid Profile">Lipid Profile — ₹500</option>
-                                    <option value="Thyroid Profile (T3, T4, TSH)">Thyroid Profile (T3, T4, TSH) — ₹600
-                                    </option>
-                                    <option value="Liver Function Test (LFT)">Liver Function Test (LFT) — ₹550</option>
-                                    <option value="Kidney Function Test (KFT)">Kidney Function Test (KFT) — ₹550
-                                    </option>
-                                    <option value="Urine Analysis">Urine Analysis — ₹200</option>
-                                    <option value="X-Ray">X-Ray — ₹400</option>
-                                    <option value="ECG (Electrocardiogram)">ECG (Electrocardiogram) — ₹300</option>
-                                    <option value="Ultrasound">Ultrasound — ₹800</option>
-                                    <option value="Vitamin D Test">Vitamin D Test — ₹700</option>
-                                    <option value="HbA1c (Glycated Hemoglobin)">HbA1c (Glycated Hemoglobin) — ₹450
-                                    </option>
+                                    <option value="">Loading services...</option>
                                 </select>
                                 <span class="error-msg" id="serviceTypeError">Please select a service</span>
                             </div>
