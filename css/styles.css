@@ -419,7 +419,7 @@ ul {
     position: relative;
     overflow: hidden;
     padding: 120px 0 80px;
-    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(240, 247, 255, 0.95)), url('../images/storefront.jpg');
+    background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(240, 247, 255, 0.7)), url('../images/hero-bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
