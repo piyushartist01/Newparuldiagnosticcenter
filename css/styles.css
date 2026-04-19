@@ -269,15 +269,13 @@ ul {
 }
 
 .brand-icon {
-    width: 44px;
-    height: 44px;
-    background: var(--primary);
-    color: var(--white);
-    border-radius: 12px;
+    width: auto;
+    height: auto;
+    background: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-sm);
+    box-shadow: none;
 }
 
 .brand-icon svg {
