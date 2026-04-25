@@ -43,7 +43,7 @@
     --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
     --container: 1200px;
-    --section-padding: 100px;
+    --section-padding: clamp(60px, 8vw, 120px);
 }
 
 /* ---- Reset & Base ---- */
@@ -276,6 +276,13 @@ ul {
     align-items: center;
     justify-content: center;
     box-shadow: none;
+}
+
+.brand-icon img {
+    width: 100px;
+    height: auto;
+    max-height: 80px;
+    object-fit: contain;
 }
 
 .brand-icon svg {
@@ -565,8 +572,11 @@ ul {
 .hero-image-wrapper img {
     width: 100%;
     height: auto;
-    object-fit: cover;
+    max-height: 550px;
+    object-fit: contain;
     border-radius: var(--radius-xl);
+    background: rgba(255,255,255,0.5);
+    box-shadow: var(--shadow-xl);
 }
 
 .floating-badge {
@@ -739,7 +749,7 @@ ul {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 24px;
 }
 
@@ -880,7 +890,7 @@ ul {
 
 .process-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 24px;
     margin-top: 60px;
     position: relative;
@@ -1273,6 +1283,8 @@ select.form-control {
 
 .footer-col li {
     margin-bottom: 12px;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .footer-col a {
@@ -1405,8 +1417,13 @@ select.form-control {
    RESPONSIVE DESIGN
    ============================================================ */
 @media (max-width: 1024px) {
-    :root {
-        --section-padding: 80px;
+    .nav-links,
+    .nav-actions .btn {
+        display: none;
+    }
+
+    .hamburger-menu {
+        display: flex;
     }
 
     .hero-container {
@@ -1437,15 +1454,6 @@ select.form-control {
         gap: 48px;
     }
 
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .process-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-
     .process-grid::before {
         display: none;
     }
@@ -1461,17 +1469,9 @@ select.form-control {
 }
 
 @media (max-width: 768px) {
-    :root {
-        --section-padding: 64px;
-    }
-
-    .nav-links,
-    .nav-actions .btn {
-        display: none;
-    }
-
-    .hamburger-menu {
-        display: flex;
+    .brand-icon img {
+        width: 80px;
+        max-height: 60px;
     }
 
     .hero {
@@ -1484,17 +1484,6 @@ select.form-control {
 
     .floating-badge {
         display: none;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .process-grid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-        margin-left: auto;
-        margin-right: auto;
     }
 
     .booking-info {
@@ -1522,10 +1511,6 @@ select.form-control {
 }
 
 @media (max-width: 480px) {
-    :root {
-        --section-padding: 48px;
-    }
-
     .container {
         padding: 0 16px;
     }
